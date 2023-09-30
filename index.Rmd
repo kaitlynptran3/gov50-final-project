@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Kaitlyn Tran"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,6 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring data related to how politicians trend on social media (measured through hashtags or the frequency of their name in a post/tweet/etc) and how that correlates with their popularity ratings at the time.
+
+Alternatively, I'm also thinking about looking at the frequency of migration news articles in the media and how the increase/decrease of media attention correlates with negative/positive public opinion on migration. A problem I see with this is that the public opinion on migration might not be surveyed frequently enough to be able to examine any connection with the increase/decrease of media articles. Potentially I could just conduct this at a broader scale and look at this yearly and see if, in a year with high media attention on migration, there was a significant increase/decrease in positive/negative public opinion. 
