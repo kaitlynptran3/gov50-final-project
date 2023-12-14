@@ -6,7 +6,102 @@ output:
   distill::distill_article:
     self_contained: false
 ---
+Second Project Visualization (Fourth Milestone):
 
+```{r}
+gerrymandering$gerry_new <-
+  factor(gerrymandering$gerry, levels = c("low", "mid", "high"))
+
+gerrymandering <- gerrymandering |>
+  mutate(
+  flipped_district = ifelse((flip18) == 0, "0", "1"))
+
+levels(gerrymandering$flipped_districts)
+
+ggplot(data = gerrymandering,
+       mapping = aes(x = factor(flipped_district), fill = factor(gerry_new))) +
+         geom_bar(position = "dodge") +
+      labs(x = "District Flip", y = "Number of Districts", fill = "Level of Gerrymandering") +
+    scale_x_discrete(labels = c("No Change", "Flipped District"))
+
+gerrymandering$flipped_district <- as.numeric(gerrymandering$flipped_district)
+
+logistic_regression <- glm(flipped_district ~ gerry_new + clinton16 + trump16, family = "binomial", data = gerrymandering)
+summary(logistic_regression)
+
+modelsummary::modelsummary(
+logistic_regression,
+statistic = c("s.e. = {std.error}",
+"p = {p.value}"),
+gof_map = c("nobs", "r.squared", "adj.r.squared")
+)
+
+```
+
+First Project Visualization EDITED (THIRD MILESTONE with new data):
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(infer)
+library(descr)
+library(broom)
+
+gerrymandering <- read.csv("gerrymander (1).csv")
+gerrymandering
+
+gerrymandering$dem18 <- as.factor(gerrymandering$dem18)
+class(gerrymandering$dem18)
+names(gerrymandering$dem18) <- c("Republican", "Democrat")
+
+ggplot(data = gerrymandering,
+       mapping = aes(x = dem18, fill = dem18)) +
+  geom_bar() +
+  scale_x_discrete(labels = c("Republican", "Democrat")) +
+  scale_fill_manual(values = c("red", "blue")) +
+  labs(x = "Presidential Candidate", y = "Number of Districts", title = "Congressional Districts in 2018 and their Presidential Vote", fill = "Presidential Candidate") 
+
+```
+
+
+First Project Visualization (Third Milestone):
+
+```{r}
+
+library(tidyverse)
+library(ggplot2)
+library(infer)
+
+us_immigration <- read.csv("immigration_statistics copy.csv")
+us_immigration
+
+
+
+```
+
+```{r}
+refugee_table <- ggplot(data = us_immigration,
+                        mapping = aes(x = Year,
+                                      y = Refugee.Arrivals)) +
+  geom_point() +
+  geom_smooth() +
+  labs(x = "Year",
+       y = "Number of Refugee Arrivals")
+
+refugee_table
+
+
+```
+
+Second Milestone EDITED WITH NEW DATASET:
+
+Does a greater level of gerrymandering decrease the likelihood that a district will flip? My hypothesis is, that as the design of gerrymandering is to manipulate the districting process so that districts will be biased toward a particular party, districts that have a higher level of gerrymandering will be less likely to flip parties. 
+
+The main exploratory used will be gerry, which assigns low, mid, and high levels of gerrymandering. The level of a gerrymandering of a district was determined by the compactness of the district. Compactness means how irregular the shape was, and that was found through measuring the ratio of the area of the district to the area of a circle with the same perimeter. District boundary files from the Census were used to gather this information. Other variables that could be used are trump16 and clinton16 (which determines the percentage of the vote for each candidate in each respective district), which could be controlled for in the regression.
+
+My outcome variable of interest will be flip18, which assigns -1 if the district flipped from Democrat to Republican, 0 if the district did not flip, and 1 if the district flipped from Republican to Democrat. Data from the 2018 House election compared to the 2016 House election will be used to determine whether or not the district has flipped. 
+
+The observed pattern that would support my hypothesis would be if, as the level of gerrymandering increased, the percentage of the number of districts flipped in that level/total number of districts in that level would decrease. The observed pattern that would disprove my hypothesis would be the opposite trend, or alternatively, if the data was random and there seemed to be no pattern throughout the three levels at all. 
 
 
 Project Research Question (Second Milestone):
@@ -14,6 +109,9 @@ Project Research Question (Second Milestone):
 How does immigration policy around noncitizens differ between U.S. presidential administrations? In this study, I will be observing data on noncitizen apprehension, noncitizen removal, and noncitizen returns from the U.S. to determine the immigration policy around noncitizens. My hypothesis would be that immigration policy around noncitizens is stricter over years when a Republican administration is in power than when a Democratic administration is in power. The rate of noncitizen apprehension, removal, and returns would be comparatively larger in a Republican administration than in a Democratic administration. My dataset is a Kaggle dataset on “US Immigration Statistics” from 1980 to 2021. My unit of analysis is a Presidential administration, and I will group the years based on each U.S. President that was in power. The explanatory variable of interest is whether the administration is Republican or Democrat (this is not within the dataset, so I would need to find the information independently). My outcome variables are the “number of noncitizens apprehended in the U.S.,” “number of noncitizens removed from the U.S.,” and “number of noncitizen returns from the U.S.” I grouped these variables as “immigration policy around noncitizens” in my research question. If I observe higher numbers of noncitizen apprehension/removal/return in most Republican administrations, my hypothesis would be supported. If I observe higher numbers of noncitizen apprehension/removal/return in a significant number of Democratic administrations, my hypothesis would not be supported.
 
 
+First Milestone EDITED WITH NEW DATASET:
+
+I'm interested in exploring gerrymandering and the data around its impact on elections. Specifically, the impact on elections would be measured based on whether or not the district or state flipped from Republican to Democrat or vice versa. I would take a look all Congressional districts or all states in order to be able to develop an analysis about the effect of gerrymanding on the U.S. election system as a whole.
 
 Project Proposal (First Milestone):
 
