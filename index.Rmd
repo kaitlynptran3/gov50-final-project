@@ -9,6 +9,16 @@ output:
 Second Project Visualization (Fourth Milestone):
 
 ```{r}
+
+library(tidyverse)
+library(ggplot2)
+library(infer)
+library(descr)
+library(broom)
+
+gerrymandering <- read.csv("gerrymander (1).csv")
+gerrymandering
+
 gerrymandering$gerry_new <-
   factor(gerrymandering$gerry, levels = c("low", "mid", "high"))
 
@@ -41,14 +51,7 @@ gof_map = c("nobs", "r.squared", "adj.r.squared")
 First Project Visualization EDITED (THIRD MILESTONE with new data):
 
 ```{r}
-library(tidyverse)
-library(ggplot2)
-library(infer)
-library(descr)
-library(broom)
 
-gerrymandering <- read.csv("gerrymander (1).csv")
-gerrymandering
 
 gerrymandering$dem18 <- as.factor(gerrymandering$dem18)
 class(gerrymandering$dem18)
